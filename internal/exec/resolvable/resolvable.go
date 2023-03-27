@@ -377,8 +377,7 @@ func (b *execBuilder) makeFieldExec(typeName string, f *types.FieldDefinition, m
 	var out reflect.Type
 	if methodIndex != -1 {
 		out = m.Type.Out(0)
-		sub, ok := b.schema.EntryPoints["subscription"]
-		if ok && typeName == sub.TypeName() && out.Kind() == reflect.Chan {
+		if out.Kind() == reflect.Chan {
 			out = m.Type.Out(0).Elem()
 		}
 	} else {
